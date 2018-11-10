@@ -1,0 +1,20 @@
+<li>
+  <div class="list-item" [ngClass]="{'not-ready': item.status}">
+    <div class="item index">{{itemIndex+1}}</div>
+    <div class="item descr" *ngIf="!editMode">{{item.name}}</div>
+    <div class="item edit-descr" *ngIf="editMode">
+      <input type="text" [value]="item.name" (input)="inputHandler($event)">
+    </div>
+    <div class="item deadline">{{item.time}}</div>
+    <div class="item actions">
+      <button (click)="editBtnClickHandler()" *ngIf="!editMode">Edit</button>
+      <button [routerLink]="[item.id]">Info</button>
+      <button *ngIf="editMode" (click)="saveBtnClickHandler(item, itemIndex)">Save</button>
+      <button *ngIf="editMode" (click)="cancelBtnClickHandler()">Cancel</button>
+    </div>
+    <div class="item actions">
+      <button (click)="copyBtnClickHandler(item)">Copy</button>
+      <button *ngIf="isBuffer" (click)="pasteBtnClickHandler(itemIndex)">Paste</button>
+    </div>
+  </div>
+</li>
